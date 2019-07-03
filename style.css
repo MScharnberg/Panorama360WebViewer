@@ -2,6 +2,7 @@ html, body {
     margin: 0px;
     padding: 0px;
     background-color: dimgray;
+    font-family: 'Arial', sans-serif;
 }
 
 .menu {
@@ -11,6 +12,7 @@ html, body {
     z-index: 100;
     background-color: whitesmoke;
     height: 100vh;
+    transition: transform 2s;
 }
 
 .title {
@@ -20,9 +22,32 @@ html, body {
 }
 
 .upload-area {
-    padding: 5%;
+    padding: 30px;
+    width: 300px;
 }
 
 input {
     margin-bottom: 5%;
+}
+
+.animation-button {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 100;
+}
+
+#btn-animation {
+    width: 120px;
+}
+
+.menu-button {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    z-index: 100;
+}
+
+#btn-menu {
+    width: 100px;
 }
