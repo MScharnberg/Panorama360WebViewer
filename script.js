@@ -103,7 +103,7 @@ function onDocumentTouchMove( event ) {
 }
 function animate() {
     requestAnimationFrame( animate );
-    lon += 0.1;
+    //lon += 0.1;
     lat = Math.max( - 85, Math.min( 85, lat ) );
     phi = THREE.Math.degToRad( 90 - lat );
     theta = THREE.Math.degToRad( lon );
