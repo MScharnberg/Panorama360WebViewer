@@ -5,39 +5,38 @@ var target = new THREE.Vector3();
 var lon = 90, lat = 0;
 var phi = 0, theta = 0;
 var touchX, touchY;
-init();
-animate();
+
 function init() {
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
     scene = new THREE.Scene();
     var sides = [
         {
-            url: 'example_skybox/right.jpg',
+            url: imgRIGHT,
             position: [ - 512, 0, 0 ],
             rotation: [ 0, Math.PI / 2, 0 ]
         },
         {
-            url: 'example_skybox/left.jpg',
+            url: imgLEFT,
             position: [ 512, 0, 0 ],
             rotation: [ 0, - Math.PI / 2, 0 ]
         },
         {
-            url: 'example_skybox/up.jpg',
+            url: imgUP,
             position: [ 0, 512, 0 ],
             rotation: [ Math.PI / 2, 0, Math.PI ]
         },
         {
-            url: 'example_skybox/down.jpg',
+            url: imgDOWN,
             position: [ 0, - 512, 0 ],
             rotation: [ - Math.PI / 2, 0, Math.PI ]
         },
         {
-            url: 'example_skybox/front.jpg',
+            url: imgFRONT,
             position: [ 0, 0, 512 ],
             rotation: [ 0, Math.PI, 0 ]
         },
         {
-            url: 'example_skybox/back.jpg',
+            url: imgBACK,
             position: [ 0, 0, - 512 ],
             rotation: [ 0, 0, 0 ]
         }
@@ -113,3 +112,35 @@ function animate() {
     camera.lookAt( target );
     renderer.render( scene, camera );
 }
+
+var input = document.getElementById("fileInput");
+input.addEventListener("change",updateImages);
+var imgUP, imgDOWN, imgRIGHT, imgLEFT, imgFRONT, imgBACK;
+function updateImages() {
+    var viewBox = document.querySelector("[style]");
+    if(viewBox)
+        viewBox.parentNode.removeChild(viewBox);
+
+    if(input.files.length<6){
+        imgUP = 'example_skybox/up.jpg';
+        imgDOWN = 'example_skybox/down.jpg';
+        imgRIGHT = 'example_skybox/right.jpg';
+        imgLEFT = 'example_skybox/left.jpg';
+        imgFRONT = 'example_skybox/front.jpg';
+        imgBACK = 'example_skybox/back.jpg';
+    }
+    else {
+        imgUP = URL.createObjectURL(input.files[5]);
+        imgDOWN = URL.createObjectURL(input.files[1]);
+        imgRIGHT = URL.createObjectURL(input.files[4]);
+        imgLEFT = URL.createObjectURL(input.files[3]);
+        imgFRONT = URL.createObjectURL(input.files[2]);
+        imgBACK = URL.createObjectURL(input.files[0]);
+    }
+    init();
+}
+updateImages();
+
+//init();
+animate();
+
