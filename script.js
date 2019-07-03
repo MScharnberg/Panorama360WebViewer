@@ -5,6 +5,10 @@ var target = new THREE.Vector3();
 var lon = 90, lat = 0;
 var phi = 0, theta = 0;
 var touchX, touchY;
+var animation = false;
+var menu = true;
+var button_animation = document.getElementById('btn-animation');
+var button_menu = document.getElementById('btn-menu');
 
 function init() {
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -102,6 +106,7 @@ function onDocumentTouchMove( event ) {
 }
 function animate() {
     requestAnimationFrame( animate );
+    (animation === true) ? lon += 0.1 : lon += 0;
     //lon += 0.1;
     lat = Math.max( - 85, Math.min( 85, lat ) );
     phi = THREE.Math.degToRad( 90 - lat );
@@ -144,3 +149,21 @@ updateImages();
 //init();
 animate();
 
+
+button_animation.onclick = function animationStartStop() {
+    (animation === true) ? animation = false : animation = true;
+    (button_animation.innerHTML === 'Start Animation') ? button_animation.innerHTML = 'Stop Animation' : button_animation.innerHTML = 'Start Animation';
+}
+
+button_menu.onclick = function menuHideShow() {
+    if(menu) {
+        menu = false;
+        document.getElementById('menu').style.left = '-360px';
+        document.getElementById('menu').style.transition = 'left 1s';
+    }
+    else {
+        menu = true;
+        document.getElementById('menu').style.left = '0px';
+    }
+    (button_menu.innerHTML === 'Hide Menu') ? button_menu.innerHTML = 'Show Menu' : button_menu.innerHTML = 'Hide Menu';
+}
