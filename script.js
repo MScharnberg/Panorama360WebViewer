@@ -118,30 +118,18 @@ function animate() {
     renderer.render( scene, camera );
 }
 
-var input = document.getElementById("fileInput");
-input.addEventListener("change",updateImages);
 var imgUP, imgDOWN, imgRIGHT, imgLEFT, imgFRONT, imgBACK;
 function updateImages() {
     var viewBox = document.querySelector("[style]");
     if(viewBox)
         viewBox.parentNode.removeChild(viewBox);
 
-    if(input.files.length<6){
-        imgUP = 'example_skybox/up.jpg';
-        imgDOWN = 'example_skybox/down.jpg';
-        imgRIGHT = 'example_skybox/right.jpg';
-        imgLEFT = 'example_skybox/left.jpg';
-        imgFRONT = 'example_skybox/front.jpg';
-        imgBACK = 'example_skybox/back.jpg';
-    }
-    else {
-        imgUP = URL.createObjectURL(input.files[5]);
-        imgDOWN = URL.createObjectURL(input.files[1]);
-        imgRIGHT = URL.createObjectURL(input.files[4]);
-        imgLEFT = URL.createObjectURL(input.files[3]);
-        imgFRONT = URL.createObjectURL(input.files[2]);
-        imgBACK = URL.createObjectURL(input.files[0]);
-    }
+    imgUP = 'example_skybox/up.jpg';
+    imgDOWN = 'example_skybox/down.jpg';
+    imgRIGHT = 'example_skybox/right.jpg';
+    imgLEFT = 'example_skybox/left.jpg';
+    imgFRONT = 'example_skybox/front.jpg';
+    imgBACK = 'example_skybox/back.jpg';
     init();
 }
 updateImages();
@@ -149,21 +137,8 @@ updateImages();
 //init();
 animate();
 
-
 button_animation.onclick = function animationStartStop() {
     (animation === true) ? animation = false : animation = true;
     (button_animation.innerHTML === 'Start Animation') ? button_animation.innerHTML = 'Stop Animation' : button_animation.innerHTML = 'Start Animation';
 }
 
-button_menu.onclick = function menuHideShow() {
-    if(menu) {
-        menu = false;
-        document.getElementById('menu').style.left = '-360px';
-        document.getElementById('menu').style.transition = 'left 1s';
-    }
-    else {
-        menu = true;
-        document.getElementById('menu').style.left = '0px';
-    }
-    (button_menu.innerHTML === 'Hide Menu') ? button_menu.innerHTML = 'Show Menu' : button_menu.innerHTML = 'Hide Menu';
-}
